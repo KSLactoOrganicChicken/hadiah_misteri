@@ -16,12 +16,12 @@ function startSpinning() {
     let prizeText = document.getElementById("prize-text");
     let prizeImage = document.getElementById("prize-image");
     let winSound = document.getElementById("win-sound");
-    
-    let totalTime = 10000; // Total spinning time (10 seconds)
-    let minSpeed = 50;    // Fastest speed (50ms per switch)
-    let maxSpeed = 500;   // Slowest speed (500ms per switch)
+
+    let totalTime = 15000; // Total spinning time (15 seconds)
+    let minSpeed = 50;     // Fastest speed (50ms per switch)
+    let maxSpeed = 250;    // Slowest speed (250ms per switch)
     let elapsedTime = 0;
-    let speed = minSpeed; // Start fast
+    let speed = minSpeed;  // Start with a faster speed
 
     prizeImage.style.display = "none"; // Hide image initially
 
@@ -29,14 +29,14 @@ function startSpinning() {
         let randomIndex = Math.floor(Math.random() * prizes.length);
         prizeText.innerText = prizes[randomIndex].name;
 
-        // Gradually slow down
+        // Gradually slow down by increasing the interval more smoothly
         elapsedTime += speed;
-        speed += 2; // Increase speed step by step
+        speed = Math.min(speed + 3, maxSpeed); // Increase speed gradually, without going above maxSpeed
 
-        if (speed >= maxSpeed || elapsedTime >= totalTime) {
+        if (elapsedTime >= totalTime) {
             clearInterval(spinInterval);
 
-            // Choose final prize
+            // Final prize display
             let finalPrize = prizes[Math.floor(Math.random() * prizes.length)];
             prizeText.innerText = finalPrize.name;
             prizeImage.src = finalPrize.image;
