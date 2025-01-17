@@ -17,7 +17,7 @@ function startSpinning() {
     let prizeImage = document.getElementById("prize-image");
     let winSound = document.getElementById("win-sound");
     
-    let totalTime = 7000; // Total spinning time (7 seconds)
+    let totalTime = 10000; // Total spinning time (10 seconds)
     let minSpeed = 50;    // Fastest speed (50ms per switch)
     let maxSpeed = 300;   // Slowest speed (300ms per switch)
     let elapsedTime = 0;
