@@ -16,19 +16,26 @@ function startSpinning() {
     let prizeText = document.getElementById("prize-text");
     let prizeImage = document.getElementById("prize-image");
     let winSound = document.getElementById("win-sound");
-    let totalTime = 5000;
-    let intervalTime = 100;
+    let totalTime = 5000; // Total spinning time (5 sec)
+    let minSpeed = 50; // Fastest speed (50ms per switch)
+    let maxSpeed = 300; // Slowest speed (300ms per switch)
     let elapsedTime = 0;
+    let speed = minSpeed; // Start fast
 
     prizeImage.style.display = "none"; // Hide image initially
 
     let spinInterval = setInterval(() => {
         let randomIndex = Math.floor(Math.random() * prizes.length);
         prizeText.innerText = prizes[randomIndex].name;
-        elapsedTime += intervalTime;
 
-        if (elapsedTime >= totalTime) {
+        // Gradually slow down
+        elapsedTime += speed;
+        speed += 5; // Increase speed step by step
+
+        if (speed >= maxSpeed || elapsedTime >= totalTime) {
             clearInterval(spinInterval);
+
+            // Choose final prize
             let finalPrize = prizes[Math.floor(Math.random() * prizes.length)];
             prizeText.innerText = finalPrize.name;
             prizeImage.src = finalPrize.image;
@@ -36,7 +43,7 @@ function startSpinning() {
 
             winSound.play(); // Play sound
 
-            // Confetti effect
+            // Confetti effect 🎊
             confetti({
                 particleCount: 100,
                 spread: 70,
@@ -45,5 +52,5 @@ function startSpinning() {
 
             spinning = false;
         }
-    }, intervalTime);
+    }, speed);
 }
