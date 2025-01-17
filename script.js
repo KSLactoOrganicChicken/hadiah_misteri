@@ -19,7 +19,7 @@ function startSpinning() {
     
     let totalTime = 10000; // Total spinning time (10 seconds)
     let minSpeed = 50;    // Fastest speed (50ms per switch)
-    let maxSpeed = 300;   // Slowest speed (300ms per switch)
+    let maxSpeed = 500;   // Slowest speed (500ms per switch)
     let elapsedTime = 0;
     let speed = minSpeed; // Start fast
 
@@ -31,7 +31,7 @@ function startSpinning() {
 
         // Gradually slow down
         elapsedTime += speed;
-        speed += 5; // Increase speed step by step
+        speed += 2; // Increase speed step by step
 
         if (speed >= maxSpeed || elapsedTime >= totalTime) {
             clearInterval(spinInterval);
